@@ -1,9 +1,12 @@
 package com.omr.baseclass;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import org.openqa.selenium.Alert;
@@ -428,13 +431,6 @@ public class Baseclass {
 		}
 	}
 
-	// 43. Take Screenshot
-	public File takescreenshot() {
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File screenshotAs = ts.getScreenshotAs(OutputType.FILE);
-		return screenshotAs;
-	}
-
 	// 44. Take Screenshot for element
 	public File takescreenshotforelement(WebElement element) {
 		File screenshotAs = element.getScreenshotAs(OutputType.FILE);
@@ -494,6 +490,37 @@ public class Baseclass {
 	// 50. Refresh page
 	public void refreshPage() {
 		driver.navigate().refresh();
+
+	}
+
+	// 43. Take Screenshot
+	public File takescreenshot() {
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File screenshotAs = ts.getScreenshotAs(OutputType.FILE);
+		return screenshotAs;
+	}
+
+	// 51. Take screen shot using BYTE
+	public byte[] takesscreenshotByte() {
+		TakesScreenshot screenshot = (TakesScreenshot) driver;
+		byte[] screenshotAs = screenshot.getScreenshotAs(OutputType.BYTES);
+		return screenshotAs;
+	}
+
+	// 52. Get project path
+	public String getProjectPath() {
+		String property = System.getProperty("user.dir");
+		return property;
+	}
+
+	// 53. Get the value property file
+	public String getPropertValue(String key) throws IOException {
+		FileInputStream fileInputStream = new FileInputStream(getProjectPath() + "\\configs\\config.properties");
+		Properties properties = new Properties();
+		properties.load(fileInputStream);
+		Object object = properties.get(key);
+		String string = (String) object;
+		return string;
 	}
 
 }

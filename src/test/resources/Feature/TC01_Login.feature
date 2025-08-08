@@ -11,7 +11,7 @@ Feature: Verify the Login module
       | username      | password  |
       | Srinivasanomr | Srini@123 |
 
-  @Login2
+  @Login1
   Scenario: Verify the login with invalid credentials
     Given User is on the Home page
     When User enter username "Srinivasano" and password "Srini"
