@@ -1,5 +1,8 @@
 com\omr\pages\SearchPage.class
-com\omr\runner\TestRunner.class
 com\omr\stepdefinition\TC01_LoginStep.class
 com\omr\pages\LoginPage.class
 com\omr\baseclass\Baseclass.class
+com\omr\runner\TestRunner.class
+com\omr\stepdefinition\Sample.class
+com\omr\reporting\Reporting.class
+com\omr\stepdefinition\Hooks.class

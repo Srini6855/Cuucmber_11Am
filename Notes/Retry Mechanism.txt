@@ -1,0 +1,45 @@
+
+Rerunning Failed Cucumber Scenarios using Maven Surefire Plugin
+================================================================
+
+
+You can rerun only the failed test scenarios in Cucumber using the `rerun` plugin and the Maven Surefire plugin.
+
+
+Step 1: Use the 'rerun' Plugin in CucumberOptions:
+--------------------------------------------------
+
+In your main TestRunner class:
+
+@CucumberOptions(
+    features = "src/test/resources/features",
+    glue = "stepdefinitions",
+    plugin = {
+        "pretty",
+        "html:target/cucumber-reports.html",
+        "rerun:target/failed_scenarios.txt"
+    }
+)
+
+→ This writes the failed scenarios to `target/failed_scenarios.txt`.
+
+
+Step 2: Create a Second TestRunner for Failed Scenarios
+-------------------------------------------------------
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+    features = "@target/failed_scenarios.txt",
+    glue = "stepdefinitions",
+    plugin = {"pretty", "html:target/rerun-reports.html"}
+)
+public class FailedTestRunner {
+}
+
+Step 3: Running Tests
+----------------------
+- Run Test runner
+- then run failed test runner
+
+
+

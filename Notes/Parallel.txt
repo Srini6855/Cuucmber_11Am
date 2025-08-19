@@ -1,0 +1,70 @@
+Parallel Execution in Automation Testing
+========================================
+
+What is Parallel Execution?
+---------------------------
+
+Parallel execution means running multiple tests at the same time instead of one after another (sequentially). This can involve:
+- Running multiple feature files or scenarios in parallel
+- Executing multiple test runner classes concurrently
+
+Why is Parallel Execution Needed?
+---------------------------------
+
+- Faster Feedback: Reduces total test execution time
+- Better Resource Utilization: Uses all available CPU cores effectively
+- Continuous Integration Friendly: CI pipelines run faster
+- Scalable Testing: Supports large test suites and complex test systems
+- Improves Efficiency: Increases speed of regression, smoke, sanity suites
+
+How to Configure Parallel Execution in Cucumber + Maven + JUnit
+---------------------------------------------------------------
+
+Multiple Test Runner Classes + Maven Surefire Plugin
+----------------------------------------------------
+
+1. Create separate runners:
+
+TestRunner.java:
+
+@CucumberOptions(features = "src/test/resources, glue = "stepdefinitions")
+public class Runner1 {}
+
+TestRunner1.java:
+
+@CucumberOptions(features = "src/test/resources", glue = "stepdefinitions")
+public class Runner2 {}
+
+2. Configure Maven Surefire Plugin in pom.xml:
+
+<build>
+ <pluginManagement>
+  <plugins>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.2.5</version>
+    <configuration>
+     <includes>
+      <include>*/TestRunner*.java</include>
+     </includes>
+     <forkCount>2</forkCount>
+    </configuration>
+   </plugin>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.13.0</version>
+    <configuration>
+     <!-- put your configurations here -->
+    </configuration>
+   </plugin>
+  </plugins>
+ </pluginManagement>
+</build>
+
+3. Run:
+-------
+
+mvn clean test
+

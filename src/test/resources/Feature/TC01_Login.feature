@@ -17,3 +17,9 @@ Feature: Verify the Login module
     When User enter username "Srinivasano" and password "Srini"
     And User click login button
     Then User verify the error after clicking login "Invalid Login details or Your Password might have expired."
+
+    
+   @Login1
+  Scenario: Verify the login with invalid credentials
+    Given User is on the Home page
+   
